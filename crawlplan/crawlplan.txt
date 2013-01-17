@@ -1,0 +1,27 @@
+Generated on January 16, 2013 at 3:56 pm
+Crawl Plan Name  Extremetix
+Domain  tix.extremetix.com
+Note
+CPG:
+1. Repeat crawl 1 / week
+2. Size of crawl: 10000 URLs
+Crawl Plan:
+1. Start crawl from http://www.extremetix.com/events.html
+2. From seed URL, crawl to event URLs (e.g.,
+https://tix.extremetix.com/Online/?siteID=3245&cartID=2697daea-61e3-480d-a04b-797a7c429a5a&
+SalesRef=WSeTx)
+3. From event URL crawl to URL of iframe in event URL source (e.g.,
+https://tix.extremetix.com/Online/Event_new.jsp?siteID=3245&cartID=2697daea-61e3-480d-a04b-7
+97a7c429a5a)
+3. From iframe URL, crawl to tickets URL (e.g.,
+https://tix.extremetix.com/Online/GA_new.jsp?venueID=5584&eventID=41658&cartID=2697daea-61
+e3-480d-a04b-797a7c429a5a&venueTimeZone=4&View=)
+XML Schema
+<document date_crawled="" meta_description="" title="" v="">
+<documenturl><![CDATA[]]></documenturl>
+<event date="" name="">
+<tickets><ticket price="" ticket_type="" />
+</tickets>
+<location address="" locality="" name="" region="" />
+</event>
+</document>

@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Properties;
-
 import com.eightylegs.app.parselinks.ParselinksHelper;
 import com.eightylegs.cp.link.CrawlPackageLinkSet;
 import com.eightylegs.cp.xml.config.DefaultRegexes;
@@ -47,7 +46,7 @@ public class Extremetix80app implements I80App
 	{
 		try 
 		{
-			String documentString = new String(documentContent , CHARSET);
+			//String documentString = new String(documentContent , CHARSET);
 			CrawlPackageLinkSet linkSet = new CrawlPackageLinkSet(new URL(BASE_URL), documentContent, CHARSET);
 			HashSet<String> redirectLink = ParselinksHelper.checkForHTTP30XRedirects(url, headers, statusCodeLine,null);
 			if (redirectLink != null)
@@ -76,7 +75,7 @@ public class Extremetix80app implements I80App
 			return null;
 		try
 		{
-			if(url.contains("venueID")){											
+			if(url.contains("venueID=")){											
 				DocumentTag documentTag = new DocumentTag();
 				documentTag.setAttributeRegex(DocumentAttribute.title, DefaultRegexes.DOCUMENT_TITLE);
 				documentTag.setAttributeRegex(DocumentAttribute.meta_description, DefaultRegexes.META_DESCRIPTION);
@@ -90,13 +89,9 @@ public class Extremetix80app implements I80App
 				Map<String, String> spaceReplacementValues = new HashMap<String, String>();
 				spaceReplacementValues.put("\\&nbsp;", "");
 				
-				/*Map<String, String> dateReplacementValues = new HashMap<String, String>();
-				spaceReplacementValues.put("th", "");*/
-				
 				EventTag eventTag = new EventTag();
 				eventTag.setAttributeRegex(EventAttribute.name,"<!-- Event NAME -->[\\s\\S]*?\">(.*?)</span>");
-				eventTag.setAttributeRegex(EventAttribute.date,"<!-- Event DETAILS/DESCRIPTION -->([\\s\\S]*?)</span>",new SimpleDateFormat("MMM dd, yyyy"));
-				eventTag.setAttributeRegex(EventAttribute.date,"<!-- Event DETAILS/DESCRIPTION -->([\\s\\S]*?)</span>",new SimpleDateFormat("EEE,MMM dd,yyyy "));
+				eventTag.setAttributeRegexList(EventAttribute.date, new String[] {"<!-- Event DETAILS/DESCRIPTION -->([\\s\\S]*?)</span>"},new SimpleDateFormat[] {new SimpleDateFormat("MMM dd, yyyy")});
 				
 				TicketsTag ticketsTag = new TicketsTag("<!-- TICKETS AVAILABLE -Cycle through and pull this info-->[\\s\\S]*?<!-- TICKETS LOOP END -Cycle through and pull ticketing info-->");
 				TicketTag ticketTag = new TicketTag();
